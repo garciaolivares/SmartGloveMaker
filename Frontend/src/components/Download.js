@@ -19,7 +19,7 @@ export class Download extends React.Component{
 
 
   normalizePointInSVG (point, offset){
-    let scaleFactor;  //1192 is the natural size of pattern glove file
+    let scaleFactor;  //1192 is the natural size of the pattern glove file
     let width = this.props.designer.state.width;
     width>1192? (scaleFactor = 1192/width) :
                 (scaleFactor = width/1192); 
