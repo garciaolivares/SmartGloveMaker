@@ -66,7 +66,7 @@ class FlipHand extends React.Component{
       <div className="flippingControl" style={{opacity: (this.props.view.state.animationCount === 1 || this.props.view.state.animationCount === 24? 1:0)}}> 
       	<svg 
       		onClick={this.handleClick} 
-      		viewBox="0 0 147.78 125.53" style={{height:this.props.height/3}} 
+      		viewBox="0 0 147.78 125.53" style={{height:this.props.view.props.designer.state.height/3}} 
       		onTouchStart={e => this.props.view.handleTouchStart(e)}
       		onTouchMove={e => this.props.view.handleTouchMove(e)}
       		onTouchEnd={e => this.props.view.handleTouchEnd(e)}
@@ -80,9 +80,7 @@ class FlipHand extends React.Component{
       			<polygon points="122.38 46.59 119.5 41.34 125.48 41.48 122.38 46.59"/> //back arrow
       		} 
       	</svg> 
-      </div>
-
-
+      </div> 
     );
   } 
 }
@@ -92,32 +90,35 @@ class FlipHand extends React.Component{
 export  class SensorView extends React.Component {
 	constructor(props){
 		super(props);
-		this.state = 	{
-							width:0,
+		this.state = 	{ 
 							animationCount: this.props.designer.state.isFlipped === true? 24:1,
 							animationSequence: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24],
 							startTouch:{x: 0, y: 0},
 							endTouch:{x: 0, y: 0},
+
 						}
 	}
 
 	componentWillUnmount () {
-	  clearInterval(this.timer);
+	  clearInterval(this.timer); 
 	}
+
+
 
 	tick () {
 		if(this.props.designer.state.isFlipped === true){
 			this.state.animationCount === 24 ? this.stopTimer() : this.setState({animationCount: (this.state.animationCount + 1)});	    
 		}else{
 			this.state.animationCount === 1 ? this.stopTimer() : this.setState({animationCount: (this.state.animationCount - 1)});
-		}
-		
+		}	
 	}
+
 	startTimer () {
 	  clearInterval(this.timer);
 	  this.timer = setInterval(this.tick.bind(this), 1000/24);
 	  this.props.designer.setState({isFlipped: !this.props.designer.state.isFlipped});
 	}
+
 	stopTimer () {
 	  clearInterval(this.timer);
 	}
@@ -129,7 +130,7 @@ export  class SensorView extends React.Component {
 			if(sensor !== null ){
 				sensor.setAttribute("fill","#17C0B7");
 			}
-		} 
+		}  
 	}
 
 	handleMouseDown(e){ 
@@ -163,93 +164,96 @@ export  class SensorView extends React.Component {
 	 
   	render (){  
    		let designer = this.props.designer;
-   		let sensors = this.props.designer.state.activeSensors; 
-   		//let visibleHand = this.props.designer.state.firstGesture; 
-   		let isHandFlipped = this.props.designer.state.isFlipped;
+   		let sensors = this.props.designer.state.activeSensors;   
+   		let isHandFlipped = this.props.designer.state.isFlipped; 
    		 
 	    	return ( 
-	    		<div className="content h-100"  style={{overflow: "hidden"}}>  
-	    			<FlipHand designer={this.props.designer} height={this.props.height} view={this} isHandFlipped={isHandFlipped}/>
-	    			<svg className="handModel"  x="0px" y="0px" style={{height:this.props.height, width: "100%" }}
-	    				 viewBox="0 0 720 1024" > 
-	    				{this.state.animationSequence.map(item => ( 
-	    				    <React.Fragment key={item}>
-	    				       <image hidden={this.state.animationCount === item? false:true} xlinkHref={require('../img/gestures/flip/'+item+'.png')} x="0" y="0"  width="100%" />
-	    				    </React.Fragment>
-	    				))}  
-	    				<image hidden={(sensors.includes(3) && this.state.animationCount === 1 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/3.png')} x="0" y="0"  width="100%" />
-	    				<image hidden={(sensors.includes(4) && this.state.animationCount === 1 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/4.png')} x="0" y="0"  width="100%" />
-	    				<image hidden={(sensors.includes(5) && this.state.animationCount === 1 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/5.png')} x="0" y="0"  width="100%" />
-	    				<image hidden={(sensors.includes(6) && this.state.animationCount === 1 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/6.png')} x="0" y="0"  width="100%" />
-	    				<image hidden={(sensors.includes(7) && this.state.animationCount === 1 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/7.png')} x="0" y="0"  width="100%" />
-	    				<image hidden={(sensors.includes(8) && this.state.animationCount === 1 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/8.png')} x="0" y="0"  width="100%" />
-	    				<image hidden={(sensors.includes(9) && this.state.animationCount === 1 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/9.png')} x="0" y="0"  width="100%" />
-	    				<image hidden={(sensors.includes(10) && this.state.animationCount === 1 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/10.png')} x="0" y="0"  width="100%" />
-	    				<image hidden={(sensors.includes(11) && this.state.animationCount === 1 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/11.png')} x="0" y="0"  width="100%" />
-	    				<image hidden={(sensors.includes(12) && this.state.animationCount === 1 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/12.png')} x="0" y="0"  width="100%" />
-	    				<image hidden={(sensors.includes(13) && this.state.animationCount === 1 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/13.png')} x="0" y="0"  width="100%" />
-	    				<image hidden={(sensors.includes(14) && this.state.animationCount === 1 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/14.png')} x="0" y="0"  width="100%" />
+	    		<div ref="sensorView"  className="col grid panel" style={{opacity:1}} >
+		    		<div className="content h-100"  style={{overflow: "hidden"}}>  
+		    			<FlipHand   view={this} isHandFlipped={isHandFlipped}/>
+		    			<svg className="handModel"  x="0px" y="0px" style={{height:designer.state.height, width: "100%" }}
+		    				 viewBox="0 0 720 1024" > 
+		    				{this.state.animationSequence.map(item => ( 
+		    				    <React.Fragment key={item}>
+		    				       <image hidden={this.state.animationCount === item? false:true} xlinkHref={require('../img/gestures/flip/'+item+'.png')} x="0" y="0"  width="100%" />
+		    				    </React.Fragment>
+		    				))}  
+		    				<image hidden={(sensors.includes(3) && this.state.animationCount === 1 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/3.png')} x="0" y="0"  width="100%" />
+		    				<image hidden={(sensors.includes(4) && this.state.animationCount === 1 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/4.png')} x="0" y="0"  width="100%" />
+		    				<image hidden={(sensors.includes(5) && this.state.animationCount === 1 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/5.png')} x="0" y="0"  width="100%" />
+		    				<image hidden={(sensors.includes(6) && this.state.animationCount === 1 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/6.png')} x="0" y="0"  width="100%" />
+		    				<image hidden={(sensors.includes(7) && this.state.animationCount === 1 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/7.png')} x="0" y="0"  width="100%" />
+		    				<image hidden={(sensors.includes(8) && this.state.animationCount === 1 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/8.png')} x="0" y="0"  width="100%" />
+		    				<image hidden={(sensors.includes(9) && this.state.animationCount === 1 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/9.png')} x="0" y="0"  width="100%" />
+		    				<image hidden={(sensors.includes(10) && this.state.animationCount === 1 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/10.png')} x="0" y="0"  width="100%" />
+		    				<image hidden={(sensors.includes(11) && this.state.animationCount === 1 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/11.png')} x="0" y="0"  width="100%" />
+		    				<image hidden={(sensors.includes(12) && this.state.animationCount === 1 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/12.png')} x="0" y="0"  width="100%" />
+		    				<image hidden={(sensors.includes(13) && this.state.animationCount === 1 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/13.png')} x="0" y="0"  width="100%" />
+		    				<image hidden={(sensors.includes(14) && this.state.animationCount === 1 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/14.png')} x="0" y="0"  width="100%" />
 
-	    				<image hidden={(sensors.includes(16) && this.state.animationCount === 24 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/16.png')} x="0" y="0"  width="100%" />
-	    				<image hidden={(sensors.includes(18) && this.state.animationCount === 24 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/18.png')} x="0" y="0"  width="100%" />
-	    				<image hidden={(sensors.includes(20) && this.state.animationCount === 24 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/20.png')} x="0" y="0"  width="100%" />
-	    				<image hidden={(sensors.includes(22) && this.state.animationCount === 24 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/22.png')} x="0" y="0"  width="100%" />
-	    			</svg>
+		    				<image hidden={(sensors.includes(15) && this.state.animationCount === 24 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/15.png')} x="0" y="0"  width="100%" />
+		    				<image hidden={(sensors.includes(16) && this.state.animationCount === 24 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/16.png')} x="0" y="0"  width="100%" />
+		    				<image hidden={(sensors.includes(17) && this.state.animationCount === 24 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/17.png')} x="0" y="0"  width="100%" />
+		    				<image hidden={(sensors.includes(18) && this.state.animationCount === 24 )? false:true} xlinkHref={require('../img/gestures/flip/sensors/18.png')} x="0" y="0"  width="100%" />
+		    			</svg>
 
-	    			<div id="hand" 
-	    				 className={(isHandFlipped===true)? "flipped ":""}
-	    				 onTouchStart={e => this.handleTouchStart(e)}
-	    				 onTouchMove={e => this.handleTouchMove(e)}
-	    				 onTouchEnd={e => this.handleTouchEnd(e)}
-	    				 onMouseDown={e => this.handleMouseDown(e)} 
-	    				 onMouseUp={e => this.handleMouseUp(e)} 
+		    			<div id="hand" 
+		    				 className={(isHandFlipped===true)? "flipped ":""}
+		    				 onTouchStart={e => this.handleTouchStart(e)}
+		    				 onTouchMove={e => this.handleTouchMove(e)}
+		    				 onTouchEnd={e => this.handleTouchEnd(e)}
+		    				 onMouseDown={e => this.handleMouseDown(e)} 
+		    				 onMouseUp={e => this.handleMouseUp(e)} 
 
-	    			>
-	    				<div className={"row front "+(isHandFlipped===false? "opacityTransition": "")} style={{zIndex:(isHandFlipped===true)? 1:2}}>
-	    					<div className="col sensorHandContainer" style={{maxHeight:this.props.height}}>
-	    						<div 	className="sensorGroup" 
-	    								ref="sensorGroup"  
-	    								style={{height:this.props.height, 
-	    									    width: 293.4*(this.props.height)/(499.5),
-	    									    bottom: this.props.height-8
-	    										}}> 
-	    							<ToogleSensor visibleHand="hand1" sensorId ={3 } designer={designer} selected={sensors.includes(3 )?true:false} top="11%" left="21%" />
-	    							<ToogleSensor visibleHand="hand1" sensorId ={4 } designer={designer} selected={sensors.includes(4 )?true:false} top="19.5%" left="23.6%" />
-	    							<ToogleSensor visibleHand="hand1" sensorId ={5 } designer={designer} selected={sensors.includes(5 )?true:false} top="30%" left="27%" />
-	    							<ToogleSensor visibleHand="hand1" sensorId ={6 } designer={designer} selected={sensors.includes(6 )?true:false} top="5%" left="44.5%" />
-	    							<ToogleSensor visibleHand="hand1" sensorId ={7 } designer={designer} selected={sensors.includes(7 )?true:false} top="15%" left="44.5%" />
-	    							<ToogleSensor visibleHand="hand1" sensorId ={8 } designer={designer} selected={sensors.includes(8 )?true:false} top="27%" left="45%" />
-	    							<ToogleSensor visibleHand="hand1" sensorId ={9 } designer={designer} selected={sensors.includes(9 )?true:false} top="9%" left="65%" />
-	    							<ToogleSensor visibleHand="hand1" sensorId ={10} designer={designer} selected={sensors.includes(10)?true:false} top="18.5%" left="62.5%" />
-	    							<ToogleSensor visibleHand="hand1" sensorId ={11} designer={designer} selected={sensors.includes(11)?true:false} top="28.7%" left="60.5%" />
-	    							<ToogleSensor visibleHand="hand1" sensorId ={12} designer={designer} selected={sensors.includes(12)?true:false}  top="16.5%" left="83%" />
-	    							<ToogleSensor visibleHand="hand1" sensorId ={13} designer={designer} selected={sensors.includes(13)?true:false}  top="24%" left="79.5%" />
-	    							<ToogleSensor visibleHand="hand1" sensorId ={14} designer={designer} selected={sensors.includes(14)?true:false}  top="33%" left="74.5%" />
-	    						</div>
-	    					</div>
-	    				</div> 
+		    			>
+		    				<div className={"row front "+(isHandFlipped===false? "opacityTransition": "")} style={{zIndex:(isHandFlipped===true)? 1:2}}>
+		    					<div className="col sensorHandContainer" style={{maxHeight:designer.state.height}}>
+		    						<div 	className="sensorGroup" 
+		    								ref="sensorGroup"  
+		    								style={{height:designer.state.height, 
+		    									    width: 293.4*(designer.state.height)/(499.5),
+		    									    bottom: designer.state.height-8
+		    										}}> 
+		    							<ToogleSensor visibleHand="hand1" sensorId ={3 } designer={designer} selected={sensors.includes(3 )?true:false} top="11%" left="21%" />
+		    							<ToogleSensor visibleHand="hand1" sensorId ={4 } designer={designer} selected={sensors.includes(4 )?true:false} top="19.5%" left="23.6%" />
+		    							<ToogleSensor visibleHand="hand1" sensorId ={5 } designer={designer} selected={sensors.includes(5 )?true:false} top="30%" left="27%" />
+		    							<ToogleSensor visibleHand="hand1" sensorId ={6 } designer={designer} selected={sensors.includes(6 )?true:false} top="5%" left="44.5%" />
+		    							<ToogleSensor visibleHand="hand1" sensorId ={7 } designer={designer} selected={sensors.includes(7 )?true:false} top="15%" left="44.5%" />
+		    							<ToogleSensor visibleHand="hand1" sensorId ={8 } designer={designer} selected={sensors.includes(8 )?true:false} top="27%" left="45%" />
+		    							<ToogleSensor visibleHand="hand1" sensorId ={9 } designer={designer} selected={sensors.includes(9 )?true:false} top="9%" left="65%" />
+		    							<ToogleSensor visibleHand="hand1" sensorId ={10} designer={designer} selected={sensors.includes(10)?true:false} top="18.5%" left="62.5%" />
+		    							<ToogleSensor visibleHand="hand1" sensorId ={11} designer={designer} selected={sensors.includes(11)?true:false} top="28.7%" left="60.5%" />
+		    							<ToogleSensor visibleHand="hand1" sensorId ={12} designer={designer} selected={sensors.includes(12)?true:false}  top="16.5%" left="83%" />
+		    							<ToogleSensor visibleHand="hand1" sensorId ={13} designer={designer} selected={sensors.includes(13)?true:false}  top="24%" left="79.5%" />
+		    							<ToogleSensor visibleHand="hand1" sensorId ={14} designer={designer} selected={sensors.includes(14)?true:false}  top="33%" left="74.5%" />
+		    						</div>
+		    					</div>
+		    				</div> 
 
-	    				<div className={"row back "+(isHandFlipped===true? "opacityTransition": "")} style={{zIndex:(isHandFlipped===false)? 1:2}} >
-	    					<div className="col sensorHandContainer" style={{maxHeight:this.props.height}}> 
-	    						<div 	className="sensorGroup" 
-	    								ref="sensorGroup"  
-	    								style={{height:this.props.height, 
-	    									    width: 293.4*(this.props.height)/(499.5),
-	    									    bottom: this.props.height-8
-	    										}}>
+		    				<div className={"row back "+(isHandFlipped===true? "opacityTransition": "")} style={{zIndex:(isHandFlipped===false)? 1:2}} >
+		    					<div className="col sensorHandContainer" style={{maxHeight:designer.state.height}}> 
+		    						<div 	className="sensorGroup" 
+		    								ref="sensorGroup"  
+		    								style={{height:designer.state.height, 
+		    									    width: 293.4*(designer.state.height)/(499.5),
+		    									    bottom: designer.state.height-8
+		    										}}>
 
-	    							<ToogleSensor visibleHand="hand2" sensorId ={22} designer={designer} selected={sensors.includes(22)?true:false} top="16%" left="10.5%" />
-	    							<ToogleSensor visibleHand="hand2" sensorId ={20} designer={designer} selected={sensors.includes(20)?true:false} top="7.3%" left="29%" />
-	    							<ToogleSensor visibleHand="hand2" sensorId ={18} designer={designer} selected={sensors.includes(18)?true:false} top="3%" left="50%" />
-	    							<ToogleSensor visibleHand="hand2" sensorId ={16} designer={designer} selected={sensors.includes(16)?true:false}  top="9.5%" left="72.5%" />
-	    							
-	    						</div>
-	    					</div>
-	    				</div>
-	    			</div>
-	    		</div>
-	   		);
-   		
-   		 
+		    							<ToogleSensor visibleHand="hand2" sensorId ={18} designer={designer} selected={sensors.includes(18)?true:false} top="16%" left="10.5%" />
+		    							<ToogleSensor visibleHand="hand2" sensorId ={17} designer={designer} selected={sensors.includes(17)?true:false} top="7.3%" left="29%" />
+		    							<ToogleSensor visibleHand="hand2" sensorId ={16} designer={designer} selected={sensors.includes(16)?true:false} top="3%" left="50%" />
+		    							<ToogleSensor visibleHand="hand2" sensorId ={15} designer={designer} selected={sensors.includes(15)?true:false}  top="9.5%" left="72.5%" />
+		    							
+		    						</div>
+		    					</div>
+		    				</div>
+		    			</div>
+		    		</div>
+		    	</div>
+	   		); 
   }
 };
+
+ 
+
+ 

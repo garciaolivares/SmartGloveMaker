@@ -1,0 +1,21 @@
+.sensorBtn:hover{
+	stroke:black;
+	r: 15px;
+	cursor: pointer;
+	z-index: 100000;
+}
+
+.pin:hover{
+	stroke:black;
+	r: 20px;
+	cursor: pointer;
+	transform: translate(0, 0, 1000);
+}
+
+.line{
+	stroke:black;
+	stroke-width: 3px; 
+	r: 20px;
+	cursor: pointer;
+	transform: translate(0, 0, 1000);
+}

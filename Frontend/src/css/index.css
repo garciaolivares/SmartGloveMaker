@@ -1,6 +1,11 @@
 html{
   height: 100%;
   width: 100%;
+
+}
+
+svg{
+  pointer-events: all;
 }
 
 body{
@@ -305,20 +310,6 @@ canvas{
   position: relative; 
   margin: 0 auto; 
   overflow: hidden;
-}
-
-
-.canvasWrapper, .patternWrapper , #handSVGWrapper, .lilypadWrapper {
-    position: absolute;
-    top: 0;
-    left: 0; 
-    height: 100%;
-}
-
-#handSVG { 
-  margin: 0 auto;
-  position: absolute;
-  width: 100%;
 }
 
 #gridWrapper{

@@ -6,7 +6,7 @@ let moment = require('moment');
 let iteration =0;  
 let gridGraph = [];
 
-const widgetGlove =   {
+const widgetGlove =  {
                       sensors:{
                          1:{ startPoint: [935,560], endPin: "thumb" },
                          2:{ startPoint: [265,550], endPin: "VOL"   },

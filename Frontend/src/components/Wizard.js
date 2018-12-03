@@ -1,6 +1,6 @@
 import React from 'react'; 
 import {Home} from './Home';
-import {Designer} from './Designer'; 
+import {Designer} from './EagleDesigner'; 
 import {Directions} from './Directions'; 
 import {DeviceConnection} from './DeviceConnection'; 
 
