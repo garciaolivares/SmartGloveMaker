@@ -1043,6 +1043,7 @@ canvas{
   cursor: pointer;
   background: white;
   z-index: 1;
+  text-align: center;
 }
 
 .btnWiring:hover{

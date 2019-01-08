@@ -1,8 +1,8 @@
-.input-file-container { 
+.playerWrapper .input-file-container { 
   width: 2vh;
 } 
 
-.input-file-container img{
+.playerWrapper .input-file-container img{
   width: 58%;
   height: 70%;
   margin: 16% 0 0% 7%;
@@ -13,7 +13,7 @@
   padding: 0 !important; 
 }
 
- .input-file-trigger {
+.playerWrapper  .input-file-trigger {
 	display: block;
 	background: #ff0050;
 	color: #fff;
@@ -28,7 +28,7 @@
 	right:  1.5vh;
 	top: 1.5vh;
 }
- .input-file {
+.playerWrapper  .input-file {
   position: absolute;
   top: 0; left: 0;
   width: 6vh;
@@ -37,10 +37,10 @@
   cursor: pointer;
   display: none;
 }
- .input-file:hover + .input-file-trigger,
- .input-file:focus + .input-file-trigger,
- .input-file-trigger:hover,
- .input-file-trigger:focus {
+.playerWrapper  .input-file:hover + .input-file-trigger,
+.playerWrapper  .input-file:focus + .input-file-trigger,
+.playerWrapper  .input-file-trigger:hover,
+.playerWrapper  .input-file-trigger:focus {
  
   color: white;
   outline: none;
@@ -48,10 +48,10 @@
   box-shadow: 0px 0px 4px 2px #990000;
 }
 
-.file-return {
+.playerWrapper .file-return {
   display: none;
 }
-.file-return:not(:empty) {
+.playerWrapper .file-return:not(:empty) {
   margin: 1vh 0;
   display: inherit;
 }

@@ -7,15 +7,75 @@
 
 .pin:hover{
 	stroke:black;
-	r: 20px;
+	r: 12px;
 	cursor: pointer;
+	fill: blue !important;
 	transform: translate(0, 0, 1000);
 }
 
 .line{
 	stroke:black;
-	stroke-width: 3px; 
-	r: 20px;
-	cursor: pointer;
-	transform: translate(0, 0, 1000);
+	stroke-width: 3px;    
+}
+
+.pinName{
+	position: absolute;
+	bottom: 20px;
+	left: 20px;
+	font-size: 30px;
+	-webkit-transition: opacity 0.8s; /* Safari */
+	transition: opacity 0.8s;
+}
+
+
+.uploadBRD .input-file-container { 
+   
+} 
+
+.uploadBRD .input-file-container img{
+  width: 58%;
+  height: 70%;
+  margin: 16% 0 0% 7%;
+}
+
+ 
+
+.uploadBRD .input-file-trigger {
+	position: absolute;
+    right: 15px;
+    border: 0.7px solid #ff004e;
+    border-radius: 0.5rem;
+    color: #ff004e;
+    top: 85px;
+    padding: 5px 10px;
+    cursor: pointer;
+    background: white;
+    z-index: 1;
+    text-align: center;
+
+}
+.uploadBRD .input-file {
+  position: absolute;
+  top: 0; left: 0;
+  width: 6vh;
+  opacity: 0;
+  padding: 1.68vh 0;
+  cursor: pointer;
+  display: none;
+}
+.uploadBRD .input-file:hover + .input-file-trigger,
+.uploadBRD .input-file:focus + .input-file-trigger,
+.uploadBRD .input-file-trigger:hover,
+.uploadBRD .input-file-trigger:focus {
+ 
+	background: #ff004e;
+	color: white;
+}
+
+.uploadBRD .file-return {
+  display: none;
+}
+.uploadBRD .file-return:not(:empty) {
+  margin: 1vh 0;
+  display: inherit;
 }

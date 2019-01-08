@@ -15,6 +15,8 @@ export class Designer extends React.Component{
       warning:"",
       activeSensors: [1,2], 
       mappings: {},
+      wires:[],
+      buttonsPosition:[]
       
     }; 
       this.handleBackClick = this.handleBackClick.bind(this);
@@ -109,7 +111,7 @@ export class Designer extends React.Component{
                     <span>
                       {this.state.flow === 1?   "Home":
                         this.state.flow === 2?  "Choose Buttons":
-                                                "Wiring Diagram"
+                                                "Connect Buttons to Pins"
                       } 
                     </span>
                   </div>
@@ -117,8 +119,8 @@ export class Designer extends React.Component{
                 <div className="col-6">
                   <div className="title">
                     {this.state.flow === 1? "Choose Buttons":
-                     this.state.flow === 2? "Wiring Diagram":
-                                            "Embroidery Files"
+                     this.state.flow === 2? "Connect Buttons to Pins":
+                                            "Embroidery Files" 
                     }                    
                   </div>
                 </div>
@@ -126,7 +128,7 @@ export class Designer extends React.Component{
                   {this.navNext()}
                   <div className="flowLabel right">
                      <span>{
-                      this.state.flow === 1? "Wiring Diagram":
+                      this.state.flow === 1? "Connect Buttons to Pins":
                       this.state.flow === 2? "Embroidery Files": "Build Glove"
                       }
                     </span>
@@ -137,13 +139,16 @@ export class Designer extends React.Component{
         <div className={"row "+(this.state.flow !== 3? "frame":"")}  id="gridWrapper">
             {this.state.flow === 1? 
             <SensorView wizard={this.props.wizard}  designer={this}/>:
-            <RoutingView wizard={this.props.wizard} ref="wiring" designer={this} />
+            this.state.flow === 2?
+            <RoutingView wizard={this.props.wizard} ref="wiring" designer={this} />:
+            <Download designer={this}/>
            } 
         </div>   
       </div> 
       );
   }  
 }
+
 
 
 

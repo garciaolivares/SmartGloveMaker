@@ -302,7 +302,7 @@ export class MusicPlayer extends React.Component{
 		       	let r , g ,b; 
 		       	this.ctx.lineWidth = 0.5;
 		       	let bitFlag=false; 
-		       	let step = this.bufferLength; 
+		        
 
 		 	    for (let i = 0; i < this.bufferLength;  i++) {
 		 	    	this.barHeight = this.dataArray[i]/1.5; 
@@ -337,8 +337,7 @@ export class MusicPlayer extends React.Component{
 		 		    }
 
 		 		    x1+=this.barWidth; 
-		 		    x2-=this.barWidth;
-		 		    step--; 
+		 		    x2-=this.barWidth; 
 				}
 			 }
 			 

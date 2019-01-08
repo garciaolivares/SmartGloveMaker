@@ -96,7 +96,7 @@ export class Glove extends React.Component{
         }
       } 
 
-      if(this.props.deviceInputReader.state.flow == 3){
+      if(this.props.deviceInputReader.state.flow === 3){
         return null;
       }else{
         return indents; 

@@ -10,9 +10,7 @@ export class Wizard extends React.Component{
 	    this.state = {
 	      step:1,
 	    }; 
-		this.handleStepClick = this.handleStepClick.bind(this);
-
-
+		this.handleStepClick = this.handleStepClick.bind(this); 
 	}
 
 	handleStepClick(step) {  
@@ -23,7 +21,7 @@ export class Wizard extends React.Component{
 	  // Display fallback UI
 	  this.setState({ hasError: true });
 	  // You can also log the error to an error reporting service
-	  alert("Something unusual is happening")
+	  alert(error, info)
 	}
 
 
